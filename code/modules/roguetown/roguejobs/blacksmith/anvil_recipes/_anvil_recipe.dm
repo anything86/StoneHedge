@@ -106,7 +106,7 @@
 			modifier = 1.3
 			if(prob(20))
 				I.name = "legendary [I.name]"
-				modifier = 1.4 //Max damage of a smithed weapon is 30, 45 with this, still below unique longswords like Judgement/Crimson Fang
+				modifier = 1.5 //Max damage of a smithed weapon is 30, 45 with this, still below unique longswords like Judgement/Crimson Fang
 
 	if(!modifier)
 		return
@@ -115,7 +115,7 @@
 	I.sellprice *= modifier
 	if(istype(I, /obj/item/rogueweapon))
 		var/obj/item/rogueweapon/W = I
-		W.force *= modifier
+		W.force *= min(1.35, modifier)
 		W.throwforce *= modifier
 		W.block_chance *= modifier
 		//This is a bit misleading, since the 'armor_penetration' var on weapons is always 5, and the bulk of penetration instead comes from intents, which this doesn't affect. At max quality it was +2 AP.

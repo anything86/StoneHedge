@@ -299,7 +299,7 @@
 										modifier = 1.3
 										if(prob(20))
 											I.name = "legendary [I.name]"
-											modifier = 1.4
+											modifier = 1.5
 
 								if(istype(I, /obj/item))
 									var/obj/item/it = I
@@ -308,7 +308,7 @@
 									it.sellprice *= modifier
 								if(istype(I, /obj/item/rogueweapon))
 									var/obj/item/rogueweapon/W = I
-									W.force *= modifier
+									W.force *= min(1.35, modifier)
 									W.throwforce *= modifier
 									W.block_chance *= modifier
 									//W.armor_penetration *= modifier // See comment on _anvil_recipe.dm
