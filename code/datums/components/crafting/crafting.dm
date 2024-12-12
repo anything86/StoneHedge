@@ -299,7 +299,7 @@
 										modifier = 1.3
 										if(prob(20))
 											I.name = "legendary [I.name]"
-											modifier = 1.5
+											modifier = 1.4
 
 								if(istype(I, /obj/item))
 									var/obj/item/it = I

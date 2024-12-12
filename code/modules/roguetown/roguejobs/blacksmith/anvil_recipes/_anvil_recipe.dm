@@ -106,7 +106,7 @@
 			modifier = 1.3
 			if(prob(20))
 				I.name = "legendary [I.name]"
-				modifier = 1.5 //Max damage of a smithed weapon is 30, 45 with this, still below unique longswords like Judgement/Crimson Fang
+				modifier = 1.4 //Max damage of a smithed weapon is 30, 45 with this, still below unique longswords like Judgement/Crimson Fang
 
 	if(!modifier)
 		return
