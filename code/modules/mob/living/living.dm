@@ -186,14 +186,14 @@
 			toggle_rogmove_intent(MOVE_INTENT_WALK, TRUE)
 
 			var/mob/living/L = M
-
-			var/self_points = FLOOR((STACON + STASTR + mind.get_skill_level(/datum/skill/misc/athletics))/2, 1)
+			// Endurance + Strenght + Half of Athletics, divided by 2, on both sides. Constitution had too many quirk bonuses associated with it and is given too liberally.
+			var/self_points = FLOOR((STAEND + STASTR + mind.get_skill_level(/datum/skill/misc/athletics))/2, 1)
 			var/target_points = FLOOR((L.STAEND + L.STASTR + L.mind.get_skill_level(/datum/skill/misc/athletics))/2, 1)
 
 			switch(sprint_distance)
-				// Point blank
+				// Point blank, should be heavily disencouraged due to uninteractivity. Basically impossible to dodge and incredibly easy to pull off.
 				if(0 to 1)
-					self_points -= 4
+					self_points -= 5
 				// One to two tiles between people - this is the main combat case.
 				if(2 to 3)
 					self_points -= 2
@@ -205,9 +205,11 @@
 			if(L.dir == get_dir(src, L))
 				self_points += 2
 
-			// Ratwood does not have artificer, but we do. Numbers are basically the same so I'm keeping the old bonus.
+			// Being prone here makes you automatically susceptible to critical hits, so charging is more valuable. Charger is +2 points instead.
 			if(HAS_TRAIT(src, TRAIT_CHARGER))
-				self_points += 3
+				self_points += 2
+			if(HAS_TRAIT(L, TRAIT_CHARGER))
+				target_points += 2
 
 			// Ratwood has RNG here. No thanks.
 
@@ -1051,7 +1053,7 @@
 		log_combat(src, pulledby, "resisted grab")
 		resist_grab()
 		return
-	
+
 	// CIT CHANGE - climbing out of a gut.
 	if(vore_process_resist())
 		//Sure, give clickdelay for anti spam. shouldn't be combat voring anyways.

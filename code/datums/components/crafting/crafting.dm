@@ -295,8 +295,11 @@
 										I.name = "flawless [I.name]"
 										modifier = 1.2
 									if(6)
-										I.name = "legendary [I.name]"
+										I.name = "masterwork [I.name]"
 										modifier = 1.3
+										if(prob(20))
+											I.name = "legendary [I.name]"
+											modifier = 1.5
 
 								if(istype(I, /obj/item))
 									var/obj/item/it = I
@@ -308,13 +311,13 @@
 									W.force *= modifier
 									W.throwforce *= modifier
 									W.block_chance *= modifier
-									W.armor_penetration *= modifier
+									//W.armor_penetration *= modifier // See comment on _anvil_recipe.dm
 									W.wdefense *= modifier
 								if(istype(I, /obj/item/clothing))
 									var/obj/item/clothing/C = I
 									C.damage_deflection *= modifier
 									C.integrity_failure /= modifier
-									C.armor = C.armor.multiplymodifyAllRatings(modifier)
+									//C.armor = C.armor.multiplymodifyAllRatings(modifier) // See comment on _anvil_recipe.dm
 									C.equip_delay_self *= modifier
 
 							I.OnCrafted(user.dir, user)

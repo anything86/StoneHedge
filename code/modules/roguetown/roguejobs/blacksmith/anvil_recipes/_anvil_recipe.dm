@@ -102,9 +102,12 @@
 			I.name = "flawless [I.name]"
 			modifier = 1.2
 		if(BLACKSMITH_LEVEL_LEGENDARY to BLACKSMITH_LEVEL_MAX)
-			I.name = "legendary [I.name]"
+			I.name = "masterwork [I.name]"
 			modifier = 1.3
-	
+			if(prob(20))
+				I.name = "legendary [I.name]"
+				modifier = 1.5 //Max damage of a smithed weapon is 30, 45 with this, still below unique longswords like Judgement/Crimson Fang
+
 	if(!modifier)
 		return
 	I.obj_integrity *= modifier
@@ -115,11 +118,13 @@
 		W.force *= modifier
 		W.throwforce *= modifier
 		W.block_chance *= modifier
-		W.armor_penetration *= modifier
+		//This is a bit misleading, since the 'armor_penetration' var on weapons is always 5, and the bulk of penetration instead comes from intents, which this doesn't affect. At max quality it was +2 AP.
+		//W.armor_penetration *= modifier
 		W.wdefense *= modifier
 	if(istype(I, /obj/item/clothing))
 		var/obj/item/clothing/C = I
 		C.damage_deflection *= modifier
 		C.integrity_failure /= modifier
-		C.armor = C.armor.multiplymodifyAllRatings(modifier)
+		//Balance nightmare due to ease of churning out max quality gear, and weapon quality not affecting armor penetration properly.
+		//C.armor = C.armor.multiplymodifyAllRatings(modifier)
 		C.equip_delay_self *= modifier
